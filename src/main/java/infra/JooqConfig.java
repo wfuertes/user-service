@@ -1,4 +1,4 @@
-package users;
+package infra;
 
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;

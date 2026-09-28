@@ -1,4 +1,4 @@
-package users;
+package infra;
 
 import java.util.Map;
 

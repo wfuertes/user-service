@@ -14,16 +14,28 @@ import users.dto.CreateUser;
 
 @QuarkusTest
 class UserResourceTest {
-	@Test
-	void createsAndRetrievesUser() {
-		String email = "e2e-" + UUID.randomUUID() + "@example.test";
+    @Test
+    void createsAndRetrievesUser() {
+        String email = "e2e-" + UUID.randomUUID() + "@example.test";
 
-		given().contentType(MediaType.APPLICATION_JSON).body(new CreateUser(email, "secret-password")).when()
-				.post("/users").then().statusCode(201).body("id", notNullValue()).body("email", is(email))
-				.body("createdAt", notNullValue()).body("updatedAt", notNullValue());
+        given().contentType(MediaType.APPLICATION_JSON)
+                .body(new CreateUser(email, "secret-password"))
+                .when()
+                .post("/users")
+                .then()
+                .statusCode(201)
+                .body("id", notNullValue())
+                .body("email", is(email))
+                .body("createdAt", notNullValue())
+                .body("updatedAt", notNullValue());
 
-		given().queryParam("email", email).when().get("/users").then().statusCode(200).body("size()", is(1))
-				.body("[0].email", is(email));
-	}
+        given().queryParam("email", email)
+                .when()
+                .get("/users")
+                .then()
+                .statusCode(200)
+                .body("size()", is(1))
+                .body("[0].email", is(email));
+    }
 
 }

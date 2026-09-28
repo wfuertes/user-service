@@ -12,12 +12,12 @@ import jakarta.inject.Inject;
 @ApplicationScoped
 public class JooqConfig {
 
-	@Inject
-	AgroalDataSource dataSource;
+    @Inject
+    AgroalDataSource dataSource;
 
-	@Produces
-	@ApplicationScoped
-	public DSLContext dslContext() {
-		return DSL.using(dataSource, SQLDialect.POSTGRES);
-	}
+    @Produces
+    @ApplicationScoped
+    public DSLContext dslContext() {
+        return DSL.using(dataSource, SQLDialect.POSTGRES);
+    }
 }

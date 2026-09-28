@@ -24,45 +24,61 @@ import users.jooq.tables.records.UsersRecord;
 
 @Path("/users")
 public class UserResource {
-	private DSLContext dsl;
+    private DSLContext dsl;
 
-	@Inject
-	UserResource(DSLContext dsl) {
-		this.dsl = dsl;
-	}
+    @Inject
+    UserResource(DSLContext dsl) {
+        this.dsl = dsl;
+    }
 
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createUser(CreateUser createUser) {
-		UsersRecord record = dsl.newRecord(USERS).setEmail(createUser.email()).setPassword(createUser.password());
-		record.store();
-		record.refresh();
-		return Response.status(Response.Status.CREATED).entity(deserialize(record)).build();
-	}
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createUser(CreateUser createUser) {
+        UsersRecord record = dsl.newRecord(USERS)
+                .setEmail(createUser.email())
+                .setPassword(createUser.password());
+        record.store();
+        record.refresh();
+        return Response.status(Response.Status.CREATED)
+                .entity(deserialize(record))
+                .build();
+    }
 
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getUsers(@QueryParam("email") String email, @QueryParam("limit") @DefaultValue("10") int limit,
-			@QueryParam("offset") @DefaultValue("0") int offset) {
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUsers(@QueryParam("email") String email, @QueryParam("limit") @DefaultValue("10") int limit,
+            @QueryParam("offset") @DefaultValue("0") int offset) {
 
-		// 1. The inner subquery: It only selects the indexed ID column
-		var deferred = dsl.select(USERS.ID).from(USERS)
-				.where(StringUtils.isBlank(email) ? DSL.noCondition() : USERS.EMAIL.containsIgnoreCase(email))
-				.orderBy(USERS.ID.desc()) // Crucial: Orders the subquery so offset is predictable
-				.limit(limit).offset(offset).asTable("deferred");
+        // 1. The inner subquery: It only selects the indexed ID column
+        var deferred = dsl.select(USERS.ID)
+                .from(USERS)
+                .where(StringUtils.isBlank(email) ? DSL.noCondition() : USERS.EMAIL.containsIgnoreCase(email))
+                .orderBy(USERS.ID.desc()) // Crucial: Orders the subquery so offset is predictable
+                .limit(limit)
+                .offset(offset)
+                .asTable("deferred");
 
-		// 2. The outer query: Joins the full table ONLY to the 10 fetched IDs
-		List<User> users = dsl.select(USERS.ID, USERS.EMAIL, USERS.PASSWORD, USERS.CREATED_AT, USERS.UPDATED_AT)
-				.from(USERS).join(deferred).on(USERS.ID.eq(deferred.field(USERS.ID)))
-				.orderBy(deferred.field(USERS.ID).desc()).fetch()
-				.map(record -> deserialize(record.into(UsersRecord.class)));
+        // 2. The outer query: Joins the full table ONLY to the 10 fetched IDs
+        List<User> users = dsl.select(USERS.ID, USERS.EMAIL, USERS.PASSWORD, USERS.CREATED_AT, USERS.UPDATED_AT)
+                .from(USERS)
+                .join(deferred)
+                .on(USERS.ID.eq(deferred.field(USERS.ID)))
+                .orderBy(deferred.field(USERS.ID)
+                        .desc())
+                .fetch()
+                .map(record -> deserialize(record.into(UsersRecord.class)));
 
-		return Response.ok(users).build();
-	}
+        return Response.ok(users)
+                .build();
+    }
 
-	private static User deserialize(UsersRecord record) {
-		return new User(record.getId().toString(), record.getEmail(), record.getCreatedAt().toInstant(),
-				record.getUpdatedAt().toInstant());
-	}
+    private static User deserialize(UsersRecord record) {
+        return new User(record.getId()
+                .toString(), record.getEmail(),
+                record.getCreatedAt()
+                        .toInstant(),
+                record.getUpdatedAt()
+                        .toInstant());
+    }
 }

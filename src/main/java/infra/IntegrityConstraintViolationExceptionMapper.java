@@ -24,16 +24,13 @@ public class IntegrityConstraintViolationExceptionMapper
                 ? "A user with this email already exists."
                 : "The request violates a database constraint.";
 
-        return Response.status(Response.Status.CONFLICT)
-                .type(MediaType.APPLICATION_JSON)
-                .entity(Map.of("code", code, "message", message))
-                .build();
+        return Response.status(Response.Status.CONFLICT).type(MediaType.APPLICATION_JSON)
+                .entity(Map.of("code", code, "message", message)).build();
     }
 
     private boolean containsConstraint(Throwable exception, String constraint) {
         for (Throwable cause = exception; cause != null; cause = cause.getCause()) {
-            if (cause.getMessage() != null && cause.getMessage()
-                    .contains(constraint)) {
+            if (cause.getMessage() != null && cause.getMessage().contains(constraint)) {
                 return true;
             }
         }

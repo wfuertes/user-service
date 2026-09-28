@@ -9,15 +9,15 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
 
-@ApplicationScoped 
+@ApplicationScoped
 public class JooqConfig {
 
-    @Inject 
-    AgroalDataSource dataSource;
+	@Inject
+	AgroalDataSource dataSource;
 
-    @Produces
-    @ApplicationScoped
-    public DSLContext dslContext() {
-        return DSL.using(dataSource, SQLDialect.POSTGRES);
-    }
+	@Produces
+	@ApplicationScoped
+	public DSLContext dslContext() {
+		return DSL.using(dataSource, SQLDialect.POSTGRES);
+	}
 }

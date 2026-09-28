@@ -23,6 +23,7 @@
     <postgresql.version>42.7.13</postgresql.version>
     <docker-maven-plugin.version>0.49.0</docker-maven-plugin.version>
     <build-helper-maven-plugin.version>3.6.1</build-helper-maven-plugin.version>
+    <spotless.version>3.10.3</spotless.version>
 
     <!-- codegen database config -->
     <codegen.database.name>users</codegen.database.name>
@@ -231,6 +232,28 @@
                 <source>${project.build.directory}/generated-sources/jooq</source>
               </sources>
             </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <version>${spotless.version}</version>
+        <configuration>
+          <java>
+            <eclipse>
+              <version>4.41</version>
+              <file>${project.basedir}/config/eclipse-java-formatter.xml</file>
+            </eclipse>
+          </java>
+        </configuration>
+        <executions>
+          <execution>
+            <id>format-java-sources</id>
+            <phase>process-sources</phase>
+            <goals>
+              <goal>apply</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>

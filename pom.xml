@@ -24,6 +24,7 @@
     <docker-maven-plugin.version>0.49.0</docker-maven-plugin.version>
     <build-helper-maven-plugin.version>3.6.1</build-helper-maven-plugin.version>
     <spotless.version>3.10.3</spotless.version>
+    <palantir-java-format.version>2.99.0</palantir-java-format.version>
 
     <!-- codegen database config -->
     <codegen.database.name>users</codegen.database.name>
@@ -241,10 +242,9 @@
         <version>${spotless.version}</version>
         <configuration>
           <java>
-            <eclipse>
-              <version>4.41</version>
-              <file>${project.basedir}/config/eclipse-java-formatter.xml</file>
-            </eclipse>
+            <palantirJavaFormat>
+              <version>${palantir-java-format.version}</version>
+            </palantirJavaFormat>
           </java>
         </configuration>
         <executions>

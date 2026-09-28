@@ -1,18 +1,15 @@
 package infra;
 
-import java.util.Map;
-
-import org.jooq.exception.IntegrityConstraintViolationException;
-
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
+import java.util.Map;
+import org.jooq.exception.IntegrityConstraintViolationException;
 
 @Provider
 public class IntegrityConstraintViolationExceptionMapper
-        implements
-            ExceptionMapper<IntegrityConstraintViolationException> {
+        implements ExceptionMapper<IntegrityConstraintViolationException> {
 
     private static final String EMAIL_CONSTRAINT = "users_email_key";
 
@@ -24,8 +21,10 @@ public class IntegrityConstraintViolationExceptionMapper
                 ? "A user with this email already exists."
                 : "The request violates a database constraint.";
 
-        return Response.status(Response.Status.CONFLICT).type(MediaType.APPLICATION_JSON)
-                .entity(Map.of("code", code, "message", message)).build();
+        return Response.status(Response.Status.CONFLICT)
+                .type(MediaType.APPLICATION_JSON)
+                .entity(Map.of("code", code, "message", message))
+                .build();
     }
 
     private boolean containsConstraint(Throwable exception, String constraint) {

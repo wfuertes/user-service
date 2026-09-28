@@ -18,6 +18,8 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import users.dto.CreateUserDto;
+import users.dto.UserDto;
 import users.jooq.tables.records.UsersRecord;
 
 @Path("/users")

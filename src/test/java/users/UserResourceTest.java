@@ -10,6 +10,7 @@ import static org.hamcrest.Matchers.notNullValue;
 import java.util.UUID;
 
 import jakarta.ws.rs.core.MediaType;
+import users.dto.CreateUserDto;
 
 @QuarkusTest
 class UserResourceTest {

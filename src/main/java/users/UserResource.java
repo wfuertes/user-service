@@ -18,8 +18,8 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import users.dto.CreateUserDto;
-import users.dto.UserDto;
+import users.dto.CreateUser;
+import users.dto.User;
 import users.jooq.tables.records.UsersRecord;
 
 @Path("/users")
@@ -34,7 +34,7 @@ public class UserResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createUser(CreateUserDto createUser) {
+    public Response createUser(CreateUser createUser) {
         UsersRecord record = dsl.newRecord(USERS)
                 .setEmail(createUser.email())
                 .setPassword(createUser.password());
@@ -62,7 +62,7 @@ public class UserResource {
                 .asTable("deferred");
 
         // 2. The outer query: Joins the full table ONLY to the 10 fetched IDs
-        List<UserDto> users = dsl.select(USERS.ID, USERS.EMAIL, USERS.PASSWORD, USERS.CREATED_AT, USERS.UPDATED_AT)
+        List<User> users = dsl.select(USERS.ID, USERS.EMAIL, USERS.PASSWORD, USERS.CREATED_AT, USERS.UPDATED_AT)
                 .from(USERS)
                 .join(deferred).on(USERS.ID.eq(deferred.field(USERS.ID)))
                 .orderBy(deferred.field(USERS.ID).desc())
@@ -72,8 +72,8 @@ public class UserResource {
         return Response.ok(users).build();
     }
 
-    private static UserDto deserialize(UsersRecord record) {
-        return new UserDto(
+    private static User deserialize(UsersRecord record) {
+        return new User(
                 record.getId().toString(),
                 record.getEmail(),
                 record.getCreatedAt().toInstant(),

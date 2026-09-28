@@ -2,7 +2,7 @@ package users.dto;
 
 import java.time.Instant;
 
-public record UserDto(
+public record User(
                 String id,
                 String email,
                 Instant createdAt,

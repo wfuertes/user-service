@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.notNullValue;
 import java.util.UUID;
 
 import jakarta.ws.rs.core.MediaType;
-import users.dto.CreateUserDto;
+import users.dto.CreateUser;
 
 @QuarkusTest
 class UserResourceTest {
@@ -20,7 +20,7 @@ class UserResourceTest {
 
         given()
             .contentType(MediaType.APPLICATION_JSON)
-            .body(new CreateUserDto(email, "secret-password"))
+            .body(new CreateUser(email, "secret-password"))
         .when()
             .post("/users")
         .then()

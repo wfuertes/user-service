@@ -27,7 +27,7 @@ public class JooqUserRepository implements UserRepository {
     @Override
     public void save(User user) {
         UsersRecord record = serialize(user);
-        dsl.executeInsert(record);
+        dsl.insertInto(USERS).set(record).execute();
     }
 
     @Override

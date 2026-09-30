@@ -1,53 +1,37 @@
-package users;
+package infra.sql;
 
 import static users.jooq.tables.Users.USERS;
 
+import domain.User;
+import domain.UserId;
+import domain.UserRepository;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.DefaultValue;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
+import java.time.ZoneOffset;
 import java.util.List;
 import org.jooq.DSLContext;
 import org.jooq.impl.DSL;
 import org.jooq.tools.StringUtils;
-import users.dto.CreateUser;
-import users.dto.User;
 import users.jooq.tables.records.UsersRecord;
 
-@Path("/users")
-public class UserResource {
-    private DSLContext dsl;
+@ApplicationScoped
+public class JooqUserRepository implements UserRepository {
+
+    private final DSLContext dsl;
 
     @Inject
-    UserResource(DSLContext dsl) {
+    JooqUserRepository(DSLContext dsl) {
         this.dsl = dsl;
     }
 
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response createUser(CreateUser createUser) {
-        UsersRecord record = dsl.newRecord(USERS).setEmail(createUser.email()).setPassword(createUser.password());
-        record.store();
-        record.refresh();
-        return Response.status(Response.Status.CREATED)
-                .entity(deserialize(record))
-                .build();
+    @Override
+    public void save(User user) {
+        UsersRecord record = serialize(user);
+        dsl.executeInsert(record);
     }
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getUsers(
-            @QueryParam("email") String email,
-            @QueryParam("limit") @DefaultValue("10") int limit,
-            @QueryParam("offset") @DefaultValue("0") int offset) {
-
+    @Override
+    public List<User> findAll(String email, int limit, int offset) {
         // 1. The inner subquery: It only selects the indexed ID column
         var deferred = dsl.select(USERS.ID)
                 .from(USERS)
@@ -65,15 +49,23 @@ public class UserResource {
                 .orderBy(deferred.field(USERS.ID).desc())
                 .fetch()
                 .map(record -> deserialize(record.into(UsersRecord.class)));
-
-        return Response.ok(users).build();
+        return users;
     }
 
     private static User deserialize(UsersRecord record) {
         return new User(
-                record.getId().toString(),
+                new UserId(record.getId()),
                 record.getEmail(),
                 record.getCreatedAt().toInstant(),
                 record.getUpdatedAt().toInstant());
+    }
+
+    private static UsersRecord serialize(User user) {
+        UsersRecord record = new UsersRecord();
+        record.setId(user.id().value());
+        record.setEmail(user.email());
+        record.setCreatedAt(user.createdAt().atOffset(ZoneOffset.UTC));
+        record.setUpdatedAt(user.updatedAt().atOffset(ZoneOffset.UTC));
+        return record;
     }
 }

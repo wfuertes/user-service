@@ -1,4 +1,4 @@
-package infra;
+package infra.sql;
 
 import io.agroal.api.AgroalDataSource;
 import jakarta.enterprise.context.ApplicationScoped;

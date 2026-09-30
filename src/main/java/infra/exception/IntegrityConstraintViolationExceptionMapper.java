@@ -1,4 +1,4 @@
-package infra;
+package infra.exception;
 
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;

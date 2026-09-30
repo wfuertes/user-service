@@ -4,11 +4,11 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
+import api.rest.dto.CreateUser;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.ws.rs.core.MediaType;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
-import users.dto.CreateUser;
 
 @QuarkusTest
 class UserResourceTest {

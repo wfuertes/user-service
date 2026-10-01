@@ -23,7 +23,10 @@ public class UserResource {
     private final UserCredentialRepository credentialRepository;
 
     @Inject
-    UserResource(PasswordHasher passwordHasher, UserRepository userRepository, UserCredentialRepository credentialRepository) {
+    UserResource(
+            PasswordHasher passwordHasher,
+            UserRepository userRepository,
+            UserCredentialRepository credentialRepository) {
         this.passwordHasher = passwordHasher;
         this.userRepository = userRepository;
         this.credentialRepository = credentialRepository;

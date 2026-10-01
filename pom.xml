@@ -208,7 +208,7 @@
                                 <database>
                                     <name>org.jooq.meta.postgres.PostgresDatabase</name>
                                     <inputSchema>public</inputSchema>
-                                    <includes>users</includes>
+                                    <includes>users|user_credentials</includes>
                                     <excludes>flyway_schema_history</excludes>
                                 </database>
                                 <generate>

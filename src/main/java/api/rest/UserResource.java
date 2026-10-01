@@ -1,9 +1,7 @@
 package api.rest;
 
 import api.rest.dto.CreateUser;
-import domain.User;
-import domain.UserId;
-import domain.UserRepository;
+import domain.*;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DefaultValue;
@@ -14,16 +12,22 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+
 import java.time.Instant;
 import java.util.List;
 
 @Path("/users")
 public class UserResource {
+    private final PasswordHasher hasher;
     private final UserRepository repository;
+    private final UserCredentialRepository credentialRepository;
 
     @Inject
-    UserResource(UserRepository repository) {
+    UserResource(PasswordHasher hasher, UserRepository repository, UserCredentialRepository credentialRepository
+    ) {
+        this.hasher = hasher;
         this.repository = repository;
+        this.credentialRepository = credentialRepository;
     }
 
     @POST
@@ -32,6 +36,10 @@ public class UserResource {
     public Response createUser(CreateUser createUser) {
         User user = createUser.toUser(UserId.generate(), Instant.now());
         repository.save(user);
+
+        PasswordHash passwordHash = hasher.hash(createUser.password());
+        credentialRepository.save(new UserCredential(user.id(), passwordHash));
+
         return Response.status(Response.Status.CREATED).entity(user).build();
     }
 

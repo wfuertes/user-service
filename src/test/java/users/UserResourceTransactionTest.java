@@ -2,11 +2,11 @@ package users;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
+import static org.jooq.impl.DSL.name;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.jooq.impl.DSL.name;
-import static users.jooq.Tables.USER_CREDENTIALS;
 import static users.jooq.Tables.USERS;
+import static users.jooq.Tables.USER_CREDENTIALS;
 
 import api.rest.dto.CreateUser;
 import io.quarkus.test.junit.QuarkusTest;

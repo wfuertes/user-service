@@ -1,17 +1,21 @@
 package domain;
 
 import io.smallrye.config.ConfigMapping;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
+import io.smallrye.config.WithDefault;
+import io.smallrye.config.WithName;
 
 @ConfigMapping(prefix = "user-service")
 public interface AppConfig {
 
-    @ConfigProperty(name = "security.argon2.memory", defaultValue = "65536")
+    @WithName("security.argon2.memory")
+    @WithDefault("65536")
     int argon2Memory();
 
-    @ConfigProperty(name = "security.argon2.iterations", defaultValue = "3")
+    @WithName("security.argon2.iterations")
+    @WithDefault("3")
     int argon2Iterations();
 
-    @ConfigProperty(name = "security.argon2.parallelism", defaultValue = "4")
+    @WithName("security.argon2.parallelism")
+    @WithDefault("4")
     int argon2Parallelism();
 }

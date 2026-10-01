@@ -3,6 +3,7 @@ package api.rest;
 import api.rest.dto.CreateUser;
 import domain.*;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
@@ -29,6 +30,7 @@ public class UserResource {
     }
 
     @POST
+    @Transactional
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createUser(CreateUser createUser) {

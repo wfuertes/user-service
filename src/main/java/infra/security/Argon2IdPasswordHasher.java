@@ -3,6 +3,7 @@ package infra.security;
 import domain.AppConfig;
 import domain.PasswordHash;
 import domain.PasswordHasher;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -11,6 +12,7 @@ import java.util.Base64;
 import org.bouncycastle.crypto.generators.Argon2BytesGenerator;
 import org.bouncycastle.crypto.params.Argon2Parameters;
 
+@ApplicationScoped
 public class Argon2IdPasswordHasher implements PasswordHasher {
     private static final String ALGORITHM = "argon2id";
     private static final SecureRandom SECURE_RANDOM = new SecureRandom();

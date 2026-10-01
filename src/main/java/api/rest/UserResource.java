@@ -12,7 +12,6 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-
 import java.time.Instant;
 import java.util.List;
 
@@ -23,8 +22,7 @@ public class UserResource {
     private final UserCredentialRepository credentialRepository;
 
     @Inject
-    UserResource(PasswordHasher hasher, UserRepository repository, UserCredentialRepository credentialRepository
-    ) {
+    UserResource(PasswordHasher hasher, UserRepository repository, UserCredentialRepository credentialRepository) {
         this.hasher = hasher;
         this.repository = repository;
         this.credentialRepository = credentialRepository;

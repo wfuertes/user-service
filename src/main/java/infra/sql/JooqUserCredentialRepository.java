@@ -1,13 +1,13 @@
 package infra.sql;
 
+import static users.jooq.Tables.USER_CREDENTIALS;
+
 import domain.UserCredential;
 import domain.UserCredentialRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.jooq.DSLContext;
 import users.jooq.tables.records.UserCredentialsRecord;
-
-import static users.jooq.Tables.USER_CREDENTIALS;
 
 @ApplicationScoped
 public class JooqUserCredentialRepository implements UserCredentialRepository {

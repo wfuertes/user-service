@@ -15,14 +15,15 @@ import org.bouncycastle.crypto.params.Argon2Parameters;
 @ApplicationScoped
 public class Argon2IdPasswordHasher implements PasswordHasher {
     private static final String ALGORITHM = "argon2id";
-    private static final SecureRandom SECURE_RANDOM = new SecureRandom();
     private static final int HASH_LENGTH = 32;
 
     private final AppConfig.Argon2Config argon2Config;
+    private final SecureRandom secureRandom;
 
     @Inject
     Argon2IdPasswordHasher(AppConfig appConfig) {
         this.argon2Config = appConfig.security().argon2();
+        this.secureRandom = new SecureRandom();
     }
 
     @Override
@@ -77,7 +78,7 @@ public class Argon2IdPasswordHasher implements PasswordHasher {
 
     private byte[] generateSalt16Byte() {
         byte[] salt = new byte[16];
-        SECURE_RANDOM.nextBytes(salt);
+        secureRandom.nextBytes(salt);
         return salt;
     }
 }

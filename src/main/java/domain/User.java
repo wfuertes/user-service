@@ -1,7 +1,9 @@
 package domain;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
 import java.time.Instant;
 
+@RegisterForReflection
 public record User(UserId id, String name, String email, Instant createdAt, Instant updatedAt) {
 
     public User(UserId id, String name, String email, Instant createdAt) {

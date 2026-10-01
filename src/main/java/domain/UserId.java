@@ -1,9 +1,11 @@
 package domain;
 
 import com.github.f4b6a3.uuid.UuidCreator;
+import io.quarkus.runtime.annotations.RegisterForReflection;
 import java.util.Objects;
 import java.util.UUID;
 
+@RegisterForReflection
 public record UserId(UUID value) {
 
     public UserId {

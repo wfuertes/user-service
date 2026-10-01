@@ -14,16 +14,18 @@ import org.junit.jupiter.api.Test;
 class UserResourceTest {
     @Test
     void createsAndRetrievesUser() {
+        String name = "Peter Pan";
         String email = "e2e-" + UUID.randomUUID() + "@example.test";
 
         given().contentType(MediaType.APPLICATION_JSON)
-                .body(new CreateUser(email, "secret-password"))
+                .body(new CreateUser(name, email, "secret-password"))
                 .when()
                 .post("/users")
                 .then()
                 .statusCode(201)
                 .body("id", notNullValue())
                 .body("email", is(email))
+                .body("name", is(name))
                 .body("createdAt", notNullValue())
                 .body("updatedAt", notNullValue());
 

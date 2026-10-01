@@ -10,6 +10,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import java.time.ZoneOffset;
 import java.util.List;
+import java.util.Objects;
 import org.jooq.DSLContext;
 import org.jooq.impl.DSL;
 import org.jooq.tools.StringUtils;
@@ -46,19 +47,19 @@ public class JooqUserRepository implements UserRepository {
                 .asTable("deferred");
 
         // 2. The outer query: Joins the full table ONLY to the 10 fetched IDs
-        List<User> users = dsl.select(USERS.ID, USERS.EMAIL, USERS.CREATED_AT, USERS.UPDATED_AT)
+        return dsl.select(USERS.ID, USERS.NAME, USERS.EMAIL, USERS.CREATED_AT, USERS.UPDATED_AT)
                 .from(USERS)
                 .join(deferred)
                 .on(USERS.ID.eq(deferred.field(USERS.ID)))
-                .orderBy(deferred.field(USERS.ID).desc())
+                .orderBy(Objects.requireNonNull(deferred.field(USERS.ID)).desc())
                 .fetch()
                 .map(record -> deserialize(record.into(UsersRecord.class)));
-        return users;
     }
 
     private static User deserialize(UsersRecord record) {
         return new User(
                 new UserId(record.getId()),
+                record.getName(),
                 record.getEmail(),
                 record.getCreatedAt().toInstant(),
                 record.getUpdatedAt().toInstant());
@@ -67,6 +68,7 @@ public class JooqUserRepository implements UserRepository {
     private static UsersRecord serialize(User user) {
         UsersRecord record = new UsersRecord();
         record.setId(user.id().value());
+        record.setName(user.name());
         record.setEmail(user.email());
         record.setCreatedAt(user.createdAt().atOffset(ZoneOffset.UTC));
         record.setUpdatedAt(user.updatedAt().atOffset(ZoneOffset.UTC));

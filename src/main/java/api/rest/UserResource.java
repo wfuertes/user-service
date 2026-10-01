@@ -19,7 +19,7 @@ import java.util.List;
 
 @Path("/users")
 public class UserResource {
-    private UserRepository repository;
+    private final UserRepository repository;
 
     @Inject
     UserResource(UserRepository repository) {

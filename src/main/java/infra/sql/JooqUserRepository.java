@@ -2,6 +2,7 @@ package infra.sql;
 
 import static users.jooq.tables.Users.USERS;
 
+import domain.PasswordHash;
 import domain.User;
 import domain.UserId;
 import domain.UserRepository;
@@ -31,6 +32,9 @@ public class JooqUserRepository implements UserRepository {
     }
 
     @Override
+    public void saveWithPasswordHash(User user, PasswordHash passwordHash) {}
+
+    @Override
     public List<User> findAll(String email, int limit, int offset) {
         // 1. The inner subquery: It only selects the indexed ID column
         var deferred = dsl.select(USERS.ID)
@@ -42,7 +46,7 @@ public class JooqUserRepository implements UserRepository {
                 .asTable("deferred");
 
         // 2. The outer query: Joins the full table ONLY to the 10 fetched IDs
-        List<User> users = dsl.select(USERS.ID, USERS.EMAIL, USERS.PASSWORD, USERS.CREATED_AT, USERS.UPDATED_AT)
+        List<User> users = dsl.select(USERS.ID, USERS.EMAIL, USERS.CREATED_AT, USERS.UPDATED_AT)
                 .from(USERS)
                 .join(deferred)
                 .on(USERS.ID.eq(deferred.field(USERS.ID)))

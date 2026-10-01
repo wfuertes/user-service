@@ -18,11 +18,11 @@ public class Argon2IdPasswordHasher implements PasswordHasher {
     private static final SecureRandom SECURE_RANDOM = new SecureRandom();
     private static final int HASH_LENGTH = 32;
 
-    private final AppConfig appConfig;
+    private final AppConfig.Argon2Config argon2Config;
 
     @Inject
     Argon2IdPasswordHasher(AppConfig appConfig) {
-        this.appConfig = appConfig;
+        this.argon2Config = appConfig.security().argon2();
     }
 
     @Override
@@ -31,9 +31,9 @@ public class Argon2IdPasswordHasher implements PasswordHasher {
 
         var argon2Parameters = new Argon2Parameters.Builder(Argon2Parameters.ARGON2_id)
                 .withVersion(Argon2Parameters.ARGON2_VERSION_13)
-                .withIterations(appConfig.argon2Iterations())
-                .withMemoryAsKB(appConfig.argon2Memory())
-                .withParallelism(appConfig.argon2Parallelism())
+                .withIterations(argon2Config.iterations())
+                .withMemoryAsKB(argon2Config.memory())
+                .withParallelism(argon2Config.parallelism())
                 .withSalt(salt)
                 .build();
 
@@ -46,9 +46,9 @@ public class Argon2IdPasswordHasher implements PasswordHasher {
         return new PasswordHash(
                 ALGORITHM,
                 Argon2Parameters.ARGON2_VERSION_13,
-                appConfig.argon2Memory(),
-                appConfig.argon2Iterations(),
-                appConfig.argon2Parallelism(),
+                argon2Config.memory(),
+                argon2Config.iterations(),
+                argon2Config.parallelism(),
                 Base64.getEncoder().encodeToString(salt),
                 Base64.getEncoder().encodeToString(hash));
     }

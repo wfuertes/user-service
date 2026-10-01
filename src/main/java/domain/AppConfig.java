@@ -2,20 +2,24 @@ package domain;
 
 import io.smallrye.config.ConfigMapping;
 import io.smallrye.config.WithDefault;
-import io.smallrye.config.WithName;
 
 @ConfigMapping(prefix = "user-service")
 public interface AppConfig {
 
-    @WithName("security.argon2.memory")
-    @WithDefault("65536")
-    int argon2Memory();
+    SecurityConfig security();
 
-    @WithName("security.argon2.iterations")
-    @WithDefault("3")
-    int argon2Iterations();
+    interface SecurityConfig {
+        Argon2Config argon2();
+    }
 
-    @WithName("security.argon2.parallelism")
-    @WithDefault("4")
-    int argon2Parallelism();
+    interface Argon2Config {
+        @WithDefault("65536")
+        int memory();
+
+        @WithDefault("3")
+        int iterations();
+
+        @WithDefault("4")
+        int parallelism();
+    }
 }

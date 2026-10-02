@@ -3,6 +3,7 @@ package api.rest;
 import api.rest.dto.AuthRequest;
 import api.rest.dto.CreateUser;
 import domain.*;
+import io.smallrye.jwt.build.Jwt;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
@@ -14,6 +15,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
 
@@ -68,7 +70,14 @@ public class UserResource {
 
         return userCredential
                 .filter(credential -> credential.verifyPassword(request.password(), passwordHasher))
-                .map(credential -> Response.ok().build())
+                .map(credential -> {
+                    var jwt = Jwt.issuer("user-service")
+                            .subject(credential.userId().toString())
+                            .expiresIn(Duration.ofMinutes(15))
+                            .sign();
+
+                    return Response.ok(jwt).build();
+                })
                 .orElse(Response.status(Response.Status.UNAUTHORIZED).build());
     }
 }

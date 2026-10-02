@@ -35,4 +35,26 @@ public record PasswordHash(String alg, int v, int m, int t, int p, String salt, 
     public String toString() {
         return "$%s$v=%d$m=%d,t=%d,p=%d$%s$%s".formatted(alg, v, m, t, p, salt, hash);
     }
+
+    public static PasswordHash from(String passwordHash) {
+        if (passwordHash == null || passwordHash.isBlank()) {
+            throw new IllegalArgumentException("Password hash cannot be null or blank");
+        }
+
+        String[] parts = passwordHash.split("\\$");
+        if (parts.length != 6) {
+            throw new IllegalArgumentException("Invalid password hash format");
+        }
+
+        String alg = parts[1];
+        String[] params = parts[2].split(",");
+        int v = Integer.parseInt(params[0].substring(2));
+        int m = Integer.parseInt(params[1].substring(2));
+        int t = Integer.parseInt(params[2].substring(2));
+        int p = Integer.parseInt(params[3].substring(2));
+        String salt = parts[3];
+        String hash = parts[4];
+
+        return new PasswordHash(alg, v, m, t, p, salt, hash);
+    }
 }

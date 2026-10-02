@@ -1,5 +1,6 @@
 package api.rest;
 
+import api.rest.dto.AuthRequest;
 import api.rest.dto.CreateUser;
 import domain.*;
 import jakarta.inject.Inject;
@@ -56,5 +57,18 @@ public class UserResource {
         List<User> users = userRepository.findAll(email, limit, offset);
 
         return Response.ok(users).build();
+    }
+
+    @POST
+    @Path("/authenticate")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response authenticate(AuthRequest request) {
+        var userCredential = credentialRepository.findByEmail(request.email());
+
+        return userCredential
+                .filter(credential -> credential.verifyPassword(request.password(), passwordHasher))
+                .map(credential -> Response.ok().build())
+                .orElse(Response.status(Response.Status.UNAUTHORIZED).build());
     }
 }

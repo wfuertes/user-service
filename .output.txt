@@ -1,0 +1,474 @@
+Command finished with exit code 1.
+Command output:
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< dev.wfuertes:user-service >----------------------
+[INFO] Building user-service 1.0.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] ------------------------------[ quarkus ]-------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ user-service ---
+[INFO] Deleting /Users/willian/wfuertes/user-service/target
+[INFO] 
+[INFO] --- docker:0.49.0:start (start-codegen-database) @ user-service ---
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by com.google.common.util.concurrent.AbstractFuture$UnsafeAtomicHelper (file:/Users/willian/.m2/repository/com/google/guava/guava/32.1.2-jre/guava-32.1.2-jre.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.common.util.concurrent.AbstractFuture$UnsafeAtomicHelper
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+[INFO] DOCKER> [postgres:18.6-bookworm] "codegen-postgres": Start container 388b1472cba5
+[INFO] DOCKER> Pattern 'database system is ready to accept connections' matched for container 388b1472cba5
+[INFO] DOCKER> [postgres:18.6-bookworm] "codegen-postgres": Waited on log out 'database system is ready to accept connections' 1034 ms
+[INFO] 
+[INFO] --- flyway:13.8.0:migrate (migrate-codegen-database) @ user-service ---
+[INFO] Database: jdbc:postgresql:******** (PostgreSQL 18.6)
+[INFO] Schema history table "public"."flyway_schema_history" does not exist yet
+[INFO] Successfully validated 1 migration (execution time 00:00.007s)
+[INFO] Creating Schema History table "public"."flyway_schema_history" ...
+[INFO] Current version of schema "public": << Empty Schema >>
+[INFO] Migrating schema "public" to version "1 - create users table"
+[INFO] Successfully applied 1 migration to schema "public", now at version v1 (execution time 00:00.006s)
+[INFO] Database: jdbc:postgresql:******** (PostgreSQL 18.6)
+[INFO] 
+[INFO] --- jooq-codegen:3.21.9:generate (generate-jooq) @ user-service ---
+[INFO] 
+                                      
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@  @@        @@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@        @@@@@@@@@@
+@@@@@@@@@@@@@@@@  @@  @@    @@@@@@@@@@
+@@@@@@@@@@  @@@@  @@  @@    @@@@@@@@@@
+@@@@@@@@@@        @@        @@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@        @@        @@@@@@@@@@
+@@@@@@@@@@    @@  @@  @@@@  @@@@@@@@@@
+@@@@@@@@@@    @@  @@  @@@@  @@@@@@@@@@
+@@@@@@@@@@        @@  @  @  @@@@@@@@@@
+@@@@@@@@@@        @@        @@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  Thank you for using jOOQ 3.21.9 (Build date: 2026-09-24T13:35:23Z)
+                                      
+[INFO] 
+
+jOOQ tip of the day: You can extend jOOQ with alternative syntax using plain SQL templating: https://www.jooq.org/doc/latest/manual/sql-building/plain-sql-templating/
+
+[INFO] No <inputCatalog/> was provided. Generating ALL available catalogs instead.
+[INFO] License parameters       
+[INFO] ----------------------------------------------------------
+[INFO]   Thank you for using jOOQ and jOOQ's code generator
+[INFO]                          
+[INFO] Database parameters      
+[INFO] ----------------------------------------------------------
+[INFO]   dialect                : POSTGRES
+[INFO]   URL                    : jdbc:postgresql://localhost:61280/users
+[INFO]   target dir             : /Users/willian/wfuertes/user-service/target/generated-sources/jooq
+[INFO]   target package         : users.jooq
+[INFO]   includes               : [users|user_credentials]
+[INFO]   excludes               : [flyway_schema_history]
+[INFO]   includeExcludeColumns  : false
+[INFO] ----------------------------------------------------------
+[INFO]                          
+[INFO] JavaGenerator parameters 
+[INFO] ----------------------------------------------------------
+[INFO] annotations              
+[INFO]   generated              : false
+[INFO]   JPA                    : false
+[INFO]   JPA version            : 
+[INFO]   validation             : false
+[INFO]   spring                 : false
+[INFO] comments                 
+[INFO]   comments               : true
+[INFO]   on attributes          : true
+[INFO]   on catalogs            : true
+[INFO]   on columns             : true
+[INFO]   on embeddables         : true
+[INFO]   on keys                : true
+[INFO]   on links               : true
+[INFO]   on packages            : true
+[INFO]   on parameters          : true
+[INFO]   on queues              : true
+[INFO]   on routines            : true
+[INFO]   on schemas             : true
+[INFO]   on sequences           : true
+[INFO]   on tables              : true
+[INFO]   on udts                : true
+[INFO] sources                  
+[INFO]   sources                : true
+[INFO]   sources on views       : true
+[INFO] global references        
+[INFO]   global references      : true
+[INFO]   catalogs               : true
+[INFO]   domains                : true
+[INFO]   indexes                : true
+[INFO]   keys                   : true
+[INFO]   links                  : true
+[INFO]   queues                 : true
+[INFO]   routines               : true
+[INFO]   schemas                : true
+[INFO]   sequences              : true
+[INFO]   tables                 : true
+[INFO]   udts                   : true
+[INFO] object types             
+[INFO]   daos                   : false
+[INFO]   indexes                : true
+[INFO]   instance fields        : true
+[INFO]   interfaces             : false
+[INFO]   interfaces (immutable) : false
+[INFO]   javadoc                : true
+[INFO]   keys                   : true
+[INFO]   links                  : true
+[INFO]   pojos                  : false
+[INFO]   pojos (immutable)      : false
+[INFO]   queues                 : true
+[INFO]   records                : true
+[INFO]   routines               : true
+[INFO]   sequences              : true
+[INFO]   sequenceFlags          : true
+[INFO]   table-valued functions as routines: true
+[INFO]   table-valued functions as tables: true
+[INFO]   tables                 : true
+[INFO]   udts                   : true
+[INFO]   relations              : true
+[INFO] other                    
+[INFO]   deprecated code        : true
+[INFO] ----------------------------------------------------------
+[INFO]                          
+[INFO] Generation remarks       
+[INFO] ----------------------------------------------------------
+[INFO]                          
+[INFO] ----------------------------------------------------------
+[INFO] Generating catalogs      : Total: 1
+[INFO] Version                  : Database version is supported by dialect SQLDialect.POSTGRES: 18.6 (Debian 18.6-1.pgdg12+2)
+[INFO] ARRAYs fetched           : 0 (0 included, 0 excluded)
+[INFO] Domains fetched          : 0 (0 included, 0 excluded)
+[INFO] Tables fetched           : 3 (2 included, 1 excluded)
+[INFO] Embeddables fetched      : 0 (0 included, 0 excluded)
+[INFO] Enums fetched            : 0 (0 included, 0 excluded)
+[INFO] Packages fetched         : 0 (0 included, 0 excluded)
+[INFO] Routines fetched         : 0 (0 included, 0 excluded)
+[INFO] Sequences fetched        : 0 (0 included, 0 excluded)
+[INFO] No schema version is applied for catalog . Regenerating.
+[INFO]                          
+[INFO] Generating catalog       : DefaultCatalog.java
+[INFO] ==========================================================
+[INFO] Comments fetched         : 1 (1 included, 0 excluded)
+[INFO] Generating schemata      : Total: 1
+[INFO] No schema version is applied for schema public. Regenerating.
+[INFO] Generating schema        : Public.java
+[INFO] ----------------------------------------------------------
+[INFO] UDTs fetched             : 0 (0 included, 0 excluded)
+[INFO] Generating tables        
+[INFO] Generating table         : UserCredentials.java [input=user_credentials, pk=user_credentials_pkey]
+[INFO] Indexes fetched          : 0 (0 included, 0 excluded)
+[INFO] Generating table         : Users.java [input=users, pk=users_pkey]
+[INFO] Tables generated         : Total: 321.565ms
+[INFO] Generating table records 
+[INFO] Generating record        : UserCredentialsRecord.java
+[INFO] Generating record        : UsersRecord.java
+[INFO] Table records generated  : Total: 334.984ms, +13.419ms
+[INFO] Generating table references
+[INFO] Table refs generated     : Total: 335.431ms, +0.446ms
+[INFO] Generating Keys          
+[INFO] Keys generated           : Total: 336.744ms, +1.312ms
+[INFO] Generating Indexes       
+[INFO] Skipping empty indexes   
+[INFO] Generation finished: public: Total: 336.818ms, +0.074ms
+[INFO]                          
+[INFO] Affected files: 8        
+[INFO] Modified files: 8        
+[INFO] Removing excess files    
+[INFO] 
+[INFO] --- build-helper:3.6.1:add-source (add-jooq-generated-sources) @ user-service ---
+[INFO] Source directory: /Users/willian/wfuertes/user-service/target/generated-sources/jooq added.
+[INFO] 
+[INFO] --- docker:0.49.0:stop (stop-codegen-database) @ user-service ---
+[INFO] DOCKER> [postgres:18.6-bookworm] "codegen-postgres": Stop and removed container 388b1472cba5 after 0 ms
+[INFO] 
+[INFO] --- spotless:3.10.3:apply (format-java-sources) @ user-service ---
+[INFO] Index file does not exist. Fallback to an empty index
+[INFO] Spotless.Java is keeping 18 files clean - 0 were changed to be clean, 18 were already clean, 0 were skipped because caching determined they were already clean
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ user-service ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- quarkus:3.39.4:generate-code (default-generate-code) @ user-service ---
+[INFO] 
+[INFO] --- compiler:3.16.0:compile (default-compile) @ user-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 23 source files with javac [debug parameters release 25] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ user-service ---
+[INFO] skip non existing resourceDirectory /Users/willian/wfuertes/user-service/src/test/resources
+[INFO] 
+[INFO] --- quarkus:3.39.4:generate-code-tests (default-generate-code-tests) @ user-service ---
+[INFO] 
+[INFO] --- compiler:3.16.0:testCompile (default-testCompile) @ user-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 3 source files with javac [debug parameters release 25] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.6.0:test (default-test) @ user-service ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+2026-09-30 23:08:34,116 INFO  [org.testcontainers.DockerClientFactory] (build-22) Testcontainers version: 2.0.5
+2026-09-30 23:08:34,224 INFO  [org.testcontainers.dockerclient.DockerClientProviderStrategy] (build-22) Loaded org.testcontainers.dockerclient.UnixSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2026-09-30 23:08:34,407 INFO  [org.testcontainers.dockerclient.DockerClientProviderStrategy] (build-22) Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+2026-09-30 23:08:34,413 INFO  [org.testcontainers.images.PullPolicy] (build-22) Image pull policy will be performed by: DefaultPullPolicy()
+2026-09-30 23:08:34,416 INFO  [org.testcontainers.utility.ImageNameSubstitutor] (build-22) Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+[INFO] Running users.UserResourceTest
+2026-09-30 23:08:34,556 INFO  [org.testcontainers.DockerClientFactory] (ForkJoinPool.commonPool-worker-1) Docker host IP address is localhost
+2026-09-30 23:08:34,568 INFO  [org.testcontainers.DockerClientFactory] (ForkJoinPool.commonPool-worker-1) Connected to docker: 
+  Server Version: 29.8.1
+  API Version: 1.56
+  Operating System: Docker Desktop
+  Total Memory: 967 MB
+  Labels: 
+    com.docker.desktop.address=unix:///Users/willian/Library/Containers/com.docker.docker/Data/docker-cli.sock
+2026-09-30 23:08:34,697 INFO  [tc.testcontainers/ryuk:0.14.0] (ForkJoinPool.commonPool-worker-1) Creating container for image: testcontainers/ryuk:0.14.0
+2026-09-30 23:08:34,794 INFO  [tc.testcontainers/ryuk:0.14.0] (ForkJoinPool.commonPool-worker-1) Container testcontainers/ryuk:0.14.0 is starting: cd1c855adea9cbbb9a493e6aca7329d3dca2cbba6c6b20868a772388bea8f3f0
+2026-09-30 23:08:34,943 INFO  [tc.testcontainers/ryuk:0.14.0] (ForkJoinPool.commonPool-worker-1) Container testcontainers/ryuk:0.14.0 started in PT0.246255S
+2026-09-30 23:08:34,946 INFO  [org.testcontainers.utility.RyukResourceReaper] (ForkJoinPool.commonPool-worker-1) Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2026-09-30 23:08:34,946 INFO  [org.testcontainers.DockerClientFactory] (ForkJoinPool.commonPool-worker-1) Checking the system...
+2026-09-30 23:08:34,946 INFO  [org.testcontainers.DockerClientFactory] (ForkJoinPool.commonPool-worker-1) ✔︎ Docker server version should be at least 1.6.0
+2026-09-30 23:08:34,965 INFO  [tc.docker.io/library/postgres:18] (ForkJoinPool.commonPool-worker-1) Creating container for image: docker.io/library/postgres:18
+2026-09-30 23:08:34,984 INFO  [org.testcontainers.utility.RegistryAuthLocator] (ForkJoinPool.commonPool-worker-1) Credential helper/store (docker-credential-desktop) does not have credentials for docker.io
+2026-09-30 23:08:35,007 INFO  [tc.docker.io/library/postgres:18] (ForkJoinPool.commonPool-worker-1) Container docker.io/library/postgres:18 is starting: 051fc2c12518a8836dc466ed1e5aae674335c0dfcdd48bdece0fb93ff1b3a52d
+2026-09-30 23:08:35,723 INFO  [tc.docker.io/library/postgres:18] (ForkJoinPool.commonPool-worker-1) Container docker.io/library/postgres:18 started in PT0.757911S
+2026-09-30 23:08:35,724 INFO  [tc.docker.io/library/postgres:18] (ForkJoinPool.commonPool-worker-1) Container is started (JDBC URL: jdbc:postgresql://localhost:61288/quarkus?loggerLevel=OFF)
+2026-09-30 23:08:35,725 INFO  [io.quarkus.datasource.deployment.devservices.DevServicesDatasourceProcessor] (ForkJoinPool.commonPool-worker-1) Dev Services for default datasource (postgresql) started - container ID is 051fc2c12518
+2026-09-30 23:08:36,086 INFO  [org.flywaydb.core.FlywayExecutor] (main) Database: jdbc:postgresql://localhost:61288/quarkus?loggerLevel=OFF (PostgreSQL 18.6)
+2026-09-30 23:08:36,109 INFO  [org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory] (main) Schema history table "public"."flyway_schema_history" does not exist yet
+2026-09-30 23:08:36,111 INFO  [org.flywaydb.core.internal.command.DbValidate] (main) Successfully validated 1 migration (execution time 00:00.006s)
+2026-09-30 23:08:36,122 INFO  [org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory] (main) Creating Schema History table "public"."flyway_schema_history" ...
+2026-09-30 23:08:36,159 INFO  [org.flywaydb.core.internal.command.DbMigrate] (main) Current version of schema "public": << Empty Schema >>
+2026-09-30 23:08:36,163 INFO  [org.flywaydb.core.internal.command.DbMigrate] (main) Migrating schema "public" to version "1 - create users table"
+2026-09-30 23:08:36,180 INFO  [org.flywaydb.core.internal.command.DbMigrate] (main) Successfully applied 1 migration to schema "public", now at version v1 (execution time 00:00.009s)
+2026-09-30 23:08:36,228 INFO  [io.quarkus] (main) user-service 1.0.0-SNAPSHOT on JVM (powered by Quarkus 3.39.4) started in 2.673s. Listening on: http://localhost:8081
+2026-09-30 23:08:36,229 INFO  [io.quarkus] (main) Profile test activated. 
+2026-09-30 23:08:36,229 INFO  [io.quarkus] (main) Installed features: [agroal, cdi, compose, flyway, jdbc-postgresql, narayana-jta, resteasy, resteasy-jackson, smallrye-context-propagation, vertx]
+2026-09-30 23:08:36,884 INFO  [org.jooq.Constants] (executor-thread-1) 
+                                      
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@  @@        @@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@        @@@@@@@@@@
+@@@@@@@@@@@@@@@@  @@  @@    @@@@@@@@@@
+@@@@@@@@@@  @@@@  @@  @@    @@@@@@@@@@
+@@@@@@@@@@        @@        @@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@        @@        @@@@@@@@@@
+@@@@@@@@@@    @@  @@  @@@@  @@@@@@@@@@
+@@@@@@@@@@    @@  @@  @@@@  @@@@@@@@@@
+@@@@@@@@@@        @@  @  @  @@@@@@@@@@
+@@@@@@@@@@        @@        @@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  Thank you for using jOOQ 3.21.9 (Build date: 2026-09-24T13:35:23Z)
+                                      
+2026-09-30 23:08:36,885 INFO  [org.jooq.Constants] (executor-thread-1) 
+
+jOOQ tip of the day: jOOQ offers out of the box functionality for common scenarios related to audit columns: https://www.jooq.org/doc/latest/manual/code-generation/codegen-advanced/codegen-config-database/codegen-database-forced-types/codegen-database-forced-types-audit/
+
+2026-09-30 23:08:36,895 INFO  [org.jooq.impl.DefaultExecuteContext.logVersionSupport] (executor-thread-1) Version                  : Database version is supported by dialect SQLDialect.POSTGRES: 18.6 (Debian 18.6-1.pgdg13+2)
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.841 s -- in users.UserResourceTest
+[INFO] Running users.UserResourceTransactionTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.192 s -- in users.UserResourceTransactionTest
+2026-09-30 23:08:37,598 INFO  [io.quarkus] (main) user-service stopped in 0.008s
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- quarkus:3.39.4:build (default-build) @ user-service ---
+[INFO] [io.quarkus.deployment.pkg.jar.NativeImageSourceJarBuilder] Building native image source jar: /Users/willian/wfuertes/user-service/target/user-service-1.0.0-SNAPSHOT-native-image-source-jar/user-service-1.0.0-SNAPSHOT-runner.jar
+[INFO] [io.quarkus.deployment.pkg.steps.NativeImageBuildStep] Building native image from /Users/willian/wfuertes/user-service/target/user-service-1.0.0-SNAPSHOT-native-image-source-jar/user-service-1.0.0-SNAPSHOT-runner.jar
+[INFO] [io.quarkus.deployment.pkg.steps.NativeImageBuildStep] Running Quarkus native-image plugin on GRAALVM 25.0.1 JDK 25.0.1+8-jvmci-b01
+[INFO] [io.quarkus.deployment.pkg.steps.NativeImageBuildRunner] /Users/willian/.local/share/mise/installs/java/graalvm-community-25.0.1/bin/native-image -J-DCoordinatorEnvironmentBean.transactionStatusManagerEnable=false -J-Dsun.nio.ch.maxUpdateArraySize=100 -J-Djava.util.logging.manager=org.jboss.logmanager.LogManager -J-Dvertx.logger-delegate-factory-class-name=io.quarkus.vertx.core.runtime.VertxLogDelegateFactory -J-Dvertx.disableDnsResolver=true -J-Dio.netty.tryReflectionSetAccessible=true -J-Dio.netty.noUnsafe=false -J-Dio.netty.leakDetection.level=DISABLED -J-Dio.netty.allocator.maxOrder=3 -J-Duser.language=en -J-Duser.country=CA -J-Dlogging.initial-configurator.min-level=500 -H:+UnlockExperimentalVMOptions -H:IncludeLocales=en-CA -H:-UnlockExperimentalVMOptions --enable-native-access=ALL-UNNAMED -J-Dfile.encoding=UTF-8 -J--add-exports=org.graalvm.nativeimage.builder/com.oracle.svm.core.jdk=ALL-UNNAMED --features=io.quarkus.jdbc.postgresql.runtime.graal.SQLXMLFeature,io.quarkus.runner.Feature,io.quarkus.runtime.graal.DisableLoggingFeature,io.quarkus.runtime.graal.JVMChecksFeature,io.quarkus.runtime.graal.SkipConsoleServiceProvidersFeature,io.quarkus.jackson.runtime.graal.JacksonSerializerRegistrationFeature -J--add-exports=java.security.jgss/sun.security.krb5=ALL-UNNAMED -J--add-exports=java.security.jgss/sun.security.jgss=ALL-UNNAMED -J--add-opens=java.base/java.text=ALL-UNNAMED -J--add-opens=java.base/java.io=ALL-UNNAMED -J--add-opens=java.base/java.lang.invoke=ALL-UNNAMED -J--add-opens=java.base/java.util=ALL-UNNAMED -H:+UnlockExperimentalVMOptions -H:BuildOutputJSONFile=user-service-1.0.0-SNAPSHOT-runner-build-output-stats.json -H:-UnlockExperimentalVMOptions -H:+UnlockExperimentalVMOptions -H:+GenerateBuildArtifactsFile -H:-UnlockExperimentalVMOptions --initialize-at-run-time=com.github.f4b6a3.uuid --initialize-at-run-time=org.jboss.resteasy.plugins.providers.RegisterBuiltin -H:+UnlockExperimentalVMOptions -H:+AllowFoldMethods -H:-UnlockExperimentalVMOptions -J-Djava.awt.headless=true --no-fallback --link-at-build-time -H:+UnlockExperimentalVMOptions -H:+ReportExceptionStackTraces -H:-UnlockExperimentalVMOptions -H:-AddAllCharsets --enable-url-protocols=http,https --enable-monitoring=heapdump,threaddump -H:+UnlockExperimentalVMOptions -H:-UseServiceLoaderFeature -H:-UnlockExperimentalVMOptions --exclude-config io\.netty\.netty-codec /META-INF/native-image/io\.netty/netty-codec/generated/handlers/reflect-config\.json --exclude-config io\.netty\.netty-handler /META-INF/native-image/io\.netty/netty-handler/generated/handlers/reflect-config\.json -o user-service-1.0.0-SNAPSHOT-runner -jar user-service-1.0.0-SNAPSHOT-runner.jar
+Warning: Option 'DynamicProxyConfigurationResources' is deprecated and might be removed in a future release: This can be caused by a proxy-config.json file in your META-INF directory. Consider including proxy configuration in the reflection section of reachability-metadata.md instead.. Please refer to the GraalVM release notes.
+========================================================================================================================
+GraalVM Native Image: Generating 'user-service-1.0.0-SNAPSHOT-runner' (executable)...
+========================================================================================================================
+For detailed information and explanations on the build output, visit:
+https://github.com/oracle/graal/blob/master/docs/reference-manual/native-image/BuildOutput.md
+------------------------------------------------------------------------------------------------------------------------
+[1/8] Initializing...                                                                                    (4.6s @ 0.27GB)
+ Java version: 25.0.1+8, vendor version: GraalVM CE 25.0.1+8.1
+ Graal compiler: optimization level: 2, target machine: armv8.1-a
+ C compiler: cc (apple, arm64, 21.0.0)
+ Garbage collector: Serial GC (max heap size: 80% of RAM)
+ 8 user-specific feature(s):
+ - com.oracle.svm.thirdparty.gson.GsonFeature
+ - io.quarkus.jackson.runtime.graal.JacksonSerializerRegistrationFeature: Conditionally registers Jackson SQL/XML serializers for reflection based on reachability
+ - io.quarkus.jdbc.postgresql.runtime.graal.SQLXMLFeature
+ - io.quarkus.runner.Feature: Auto-generated class by Quarkus from the existing extensions
+ - io.quarkus.runtime.graal.DisableLoggingFeature: Adapts logging during the analysis phase
+ - io.quarkus.runtime.graal.JVMChecksFeature
+ - io.quarkus.runtime.graal.SkipConsoleServiceProvidersFeature: Skip unsupported console service providers when quarkus.native.auto-service-loader-registration is false
+ - org.eclipse.angus.activation.nativeimage.AngusActivationFeature
+------------------------------------------------------------------------------------------------------------------------
+ 5 experimental option(s) unlocked:
+ - '-H:+AllowFoldMethods' (origin(s): command line)
+ - '-H:BuildOutputJSONFile' (origin(s): command line)
+ - '-H:-UseServiceLoaderFeature' (origin(s): command line)
+ - '-H:+GenerateBuildArtifactsFile' (origin(s): command line)
+ - '-H:AddOpens' (alternative API option(s): --add-opens java.base/java.lang=ALL-UNNAMED, --add-opens java.base/java.nio=ALL-UNNAMED, --add-opens java.base/jdk.internal.misc=ALL-UNNAMED; origin(s): command line)
+------------------------------------------------------------------------------------------------------------------------
+Build resources:
+ - 8.24GB of memory (32.0% of system memory, using available memory)
+ - 12 thread(s) (100.0% of 12 available processor(s), determined at start)
+23:08:50,537 INFO  [org.joo.Constants] 
+                                      
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@  @@        @@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@        @@@@@@@@@@
+@@@@@@@@@@@@@@@@  @@  @@    @@@@@@@@@@
+@@@@@@@@@@  @@@@  @@  @@    @@@@@@@@@@
+@@@@@@@@@@        @@        @@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@        @@        @@@@@@@@@@
+@@@@@@@@@@    @@  @@  @@@@  @@@@@@@@@@
+@@@@@@@@@@    @@  @@  @@@@  @@@@@@@@@@
+@@@@@@@@@@        @@  @  @  @@@@@@@@@@
+@@@@@@@@@@        @@        @@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@  @@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  Thank you for using jOOQ 3.21.9 (Build date: 2026-09-24T13:35:23Z)
+                                      
+23:08:50,537 INFO  [org.joo.Constants] 
+
+jOOQ tip of the day: Using jOOQ's parsers, and can't parse some vendor specific syntax? The ParseListener SPI will help you: https://www.jooq.org/doc/latest/manual/sql-building/sql-parser/sql-parser-listener/
+
+[2/8] Performing analysis...  [*********]                                                               (24.2s @ 2.55GB)
+   21,729 types,  28,568 fields, and 101,578 methods found reachable
+    6,946 types,     154 fields, and   5,616 methods registered for reflection
+       63 types,      68 fields, and      55 methods registered for JNI access
+        0 downcalls and 0 upcalls registered for foreign access
+        5 native libraries: -framework CoreServices, -framework Foundation, dl, pthread, z
+[3/8] Building universe...                                                                               (5.5s @ 2.74GB)
+[4/8] Parsing methods...      [**]                                                                       (2.7s @ 2.78GB)
+[5/8] Inlining methods...     [****]                                                                     (1.3s @ 2.99GB)
+[6/8] Compiling methods...    [*****]                                                                   (21.3s @ 2.41GB)
+[7/8] Laying out methods...   [***]                                                                      (6.7s @ 3.00GB)
+[8/8] Creating image...       [***]                                                                      (6.7s @ 3.45GB)
+  41.73MB (47.11%) for code area:    65,708 compilation units
+  45.81MB (51.72%) for image heap:  472,319 objects and 97 resources
+   1.04MB ( 1.18%) for other data
+  88.58MB in total image size, 88.58MB in total file size
+------------------------------------------------------------------------------------------------------------------------
+Top 10 origins of code area:                                Top 10 object types in image heap:
+  13.81MB java.base                                           12.29MB byte[] for code metadata
+   5.39MB org.jooq.jooq-3.21.9.jar                             6.35MB byte[] for java.lang.String
+   3.13MB java.xml                                             4.38MB java.lang.Class
+   1.98MB svm.jar (Native Image)                               4.35MB com.oracle.svm.core.hub.DynamicHubCompanion
+   1.60MB org.postgresql.postgresql-42.7.13.jar                4.15MB java.lang.String
+   1.54MB c.f.jackson.core.jackson-databind-2.22.2.jar         1.57MB byte[] for general heap data
+   1.43MB org.bouncycastle.bcprov-jdk18on-1.85.2.jar         804.38kB java.util.HashMap$Node
+   1.32MB user-service-1.0.0-SNAPSHOT-runner.jar             771.68kB c.o.svm.core.hub.DynamicHub$ReflectionMetadata
+   1.22MB org.flywaydb.flyway-core-12.0.0.jar                768.47kB java.lang.String[]
+ 784.45kB modified-io.vertx.vertx-core-4.5.34.jar            579.66kB java.lang.Object[]
+   9.11MB for 124 more packages                                9.80MB for 5418 more object types
+------------------------------------------------------------------------------------------------------------------------
+Recommendations:
+ FUTR: Use '--future-defaults=all' to prepare for future releases.
+ HEAP: Set max heap for improved and more predictable memory usage.
+ CPU:  Enable more CPU features with '-march=native' for improved performance.
+------------------------------------------------------------------------------------------------------------------------
+                        5.6s (7.5% of total time) in 900 GCs | Peak RSS: 4.25GB | CPU load: 5.11
+------------------------------------------------------------------------------------------------------------------------
+Build artifacts:
+ /Users/willian/wfuertes/user-service/target/user-service-1.0.0-SNAPSHOT-native-image-source-jar/build-artifacts.json (build_info)
+ /Users/willian/wfuertes/user-service/target/user-service-1.0.0-SNAPSHOT-native-image-source-jar/user-service-1.0.0-SNAPSHOT-runner (executable)
+ /Users/willian/wfuertes/user-service/target/user-service-1.0.0-SNAPSHOT-native-image-source-jar/user-service-1.0.0-SNAPSHOT-runner-build-output-stats.json (build_info)
+========================================================================================================================
+Finished generating 'user-service-1.0.0-SNAPSHOT-runner' in 1m 14s.
+[INFO] [io.quarkus.deployment.QuarkusAugmentor] Quarkus augmentation completed in 77743ms
+[INFO] 
+[INFO] --- failsafe:3.6.0:integration-test (default) @ user-service ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running users.UserResourceIT
+2026-10-01 01:26:10,255 INFO  [org.testcontainers.DockerClientFactory] (build-20) Testcontainers version: 2.0.5
+2026-10-01 01:26:10,374 INFO  [org.testcontainers.dockerclient.DockerClientProviderStrategy] (build-20) Loaded org.testcontainers.dockerclient.UnixSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2026-10-01 01:26:10,563 INFO  [org.testcontainers.dockerclient.DockerClientProviderStrategy] (build-20) Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+2026-10-01 01:26:10,571 INFO  [org.testcontainers.images.PullPolicy] (build-20) Image pull policy will be performed by: DefaultPullPolicy()
+2026-10-01 01:26:10,572 INFO  [org.testcontainers.utility.ImageNameSubstitutor] (build-20) Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2026-10-01 01:26:10,578 INFO  [org.testcontainers.DockerClientFactory] (ForkJoinPool.commonPool-worker-1) Docker host IP address is localhost
+2026-10-01 01:26:10,593 INFO  [org.testcontainers.DockerClientFactory] (ForkJoinPool.commonPool-worker-1) Connected to docker: 
+  Server Version: 29.8.1
+  API Version: 1.56
+  Operating System: Docker Desktop
+  Total Memory: 967 MB
+  Labels: 
+    com.docker.desktop.address=unix:///Users/willian/Library/Containers/com.docker.docker/Data/docker-cli.sock
+2026-10-01 01:26:10,735 INFO  [tc.testcontainers/ryuk:0.14.0] (ForkJoinPool.commonPool-worker-1) Creating container for image: testcontainers/ryuk:0.14.0
+2026-10-01 01:26:10,862 INFO  [tc.testcontainers/ryuk:0.14.0] (ForkJoinPool.commonPool-worker-1) Container testcontainers/ryuk:0.14.0 is starting: eeabfd8cd6567701564b485ecb4de2a775f401c0e2da202f5d6c78ac5273db59
+2026-10-01 01:26:11,047 INFO  [tc.testcontainers/ryuk:0.14.0] (ForkJoinPool.commonPool-worker-1) Container testcontainers/ryuk:0.14.0 started in PT0.310041S
+2026-10-01 01:26:11,049 INFO  [org.testcontainers.utility.RyukResourceReaper] (ForkJoinPool.commonPool-worker-1) Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2026-10-01 01:26:11,050 INFO  [org.testcontainers.DockerClientFactory] (ForkJoinPool.commonPool-worker-1) Checking the system...
+2026-10-01 01:26:11,050 INFO  [org.testcontainers.DockerClientFactory] (ForkJoinPool.commonPool-worker-1) ✔︎ Docker server version should be at least 1.6.0
+2026-10-01 01:26:11,068 INFO  [tc.docker.io/library/postgres:18] (ForkJoinPool.commonPool-worker-1) Creating container for image: docker.io/library/postgres:18
+2026-10-01 01:26:11,087 INFO  [org.testcontainers.utility.RegistryAuthLocator] (ForkJoinPool.commonPool-worker-1) Credential helper/store (docker-credential-desktop) does not have credentials for docker.io
+2026-10-01 01:26:11,117 INFO  [tc.docker.io/library/postgres:18] (ForkJoinPool.commonPool-worker-1) Container docker.io/library/postgres:18 is starting: e82442e332f1616fb56236ef569ee6359156944ff9d3680da39ef2337afe01f2
+2026-10-01 01:26:11,906 INFO  [tc.docker.io/library/postgres:18] (ForkJoinPool.commonPool-worker-1) Container docker.io/library/postgres:18 started in PT0.837928S
+2026-10-01 01:26:11,908 INFO  [tc.docker.io/library/postgres:18] (ForkJoinPool.commonPool-worker-1) Container is started (JDBC URL: jdbc:postgresql://localhost:61504/quarkus?loggerLevel=OFF)
+2026-10-01 01:26:11,911 INFO  [io.quarkus.datasource.deployment.devservices.DevServicesDatasourceProcessor] (ForkJoinPool.commonPool-worker-1) Dev Services for default datasource (postgresql) started - container ID is e82442e332f1
+Executing "/Users/willian/wfuertes/user-service/target/user-service-1.0.0-SNAPSHOT-runner -Dquarkus.http.port=8081 -Dquarkus.http.ssl-port=8444 -Dtest.url=http://localhost:${quarkus.http.test-port:8081} -Dquarkus.log.file.path=/Users/willian/wfuertes/user-service/target/quarkus.log -Dquarkus.log.file.enabled=true -Dquarkus.log.category."io.quarkus".level=INFO -Dquarkus.profile=prod -Dquarkus.datasource.password=quarkus -Dquarkus.datasource.username=quarkus -Dquarkus.datasource.jdbc.url=jdbc:postgresql://localhost:61504/quarkus?loggerLevel=OFF"
+Log file '/Users/willian/wfuertes/user-service/target/quarkus.log' was not created. Check if the options quarkus.log.level and quarkus.log.file.level are at least INFO (or more verbose).
+[ERROR] Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 918.9 s <<< FAILURE! -- in users.UserResourceIT
+[ERROR] users.UserResourceIT.createsAndRetrievesUser -- Time elapsed: 0.006 s <<< ERROR!
+java.lang.RuntimeException: java.lang.IllegalStateException: Unable to determine the status of the running process. See the above logs for details
+	at io.quarkus.test.junit.QuarkusIntegrationTestExtension.throwBootFailureException(QuarkusIntegrationTestExtension.java:435)
+	at io.quarkus.test.junit.QuarkusIntegrationTestExtension.beforeEach(QuarkusIntegrationTestExtension.java:132)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+Caused by: java.lang.IllegalStateException: Unable to determine the status of the running process. See the above logs for details
+	at io.quarkus.test.common.LauncherUtil.waitForCapturedListeningData(LauncherUtil.java:109)
+	at io.quarkus.test.common.DefaultNativeImageLauncher.start(DefaultNativeImageLauncher.java:99)
+	at io.quarkus.test.junit.IntegrationTestUtil.startLauncher(IntegrationTestUtil.java:130)
+	at io.quarkus.test.junit.QuarkusIntegrationTestExtension.doProcessStart(QuarkusIntegrationTestExtension.java:361)
+	at io.quarkus.test.junit.QuarkusIntegrationTestExtension.ensureStarted(QuarkusIntegrationTestExtension.java:201)
+	at io.quarkus.test.junit.QuarkusIntegrationTestExtension.beforeAll(QuarkusIntegrationTestExtension.java:156)
+	... 1 more
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Errors: 
+[ERROR]   UserResourceIT.createsAndRetrievesUser » Runtime java.lang.IllegalStateException: Unable to determine the status of the running process. See the above logs for details
+[INFO] 
+[ERROR] Tests run: 1, Failures: 0, Errors: 1, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- quarkus:3.39.4:native-image-agent (default-native-image-agent) @ user-service ---
+[INFO] 
+[INFO] --- quarkus:3.39.4:build-enhanced-artifact (default-build-enhanced-artifact) @ user-service ---
+[INFO] 
+[INFO] --- failsafe:3.6.0:verify (default) @ user-service ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  02:33 h
+[INFO] Finished at: 2026-10-01T01:41:28-06:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-failsafe-plugin:3.6.0:verify (default) on project user-service: 
+[ERROR] 
+[ERROR] See /Users/willian/wfuertes/user-service/target/failsafe-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
